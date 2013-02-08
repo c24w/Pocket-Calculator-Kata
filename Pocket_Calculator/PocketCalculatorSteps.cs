@@ -48,16 +48,26 @@ namespace Pocket_Calculator
 
 		private void HandleButton(string button)
 		{
+			int value;
+			var isNumber = int.TryParse(button, out value);
+
+			if (isNumber) HandleNumber(value);
+			else HandleCommand(button);
+		}
+
+		private void HandleCommand(string button)
+		{
 			switch (button)
 			{
 				case "AC":
-					_value = 0;
-					break;
 				case "=":
 					_value = 0;
 					break;
-				default:
-					HandleNumber(int.Parse(button));
+				case "+":
+				case "-":
+				case "*":
+				case "/":
+					_value = 0;
 					break;
 			}
 		}

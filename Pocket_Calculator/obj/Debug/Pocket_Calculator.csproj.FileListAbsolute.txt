@@ -18,3 +18,12 @@ C:\work\Pocket_Calculator\Pocket_Calculator\bin\Debug\nunit.framework.xml
 C:\work\Pocket_Calculator\Pocket_Calculator\obj\Debug\Pocket_Calculator.csprojResolveAssemblyReference.cache
 C:\work\Pocket_Calculator\Pocket_Calculator\obj\Debug\PocketCalculator.dll
 C:\work\Pocket_Calculator\Pocket_Calculator\obj\Debug\PocketCalculator.pdb
+C:\work\Pocket-Calculator-Kata\Pocket_Calculator\bin\Debug\PocketCalculator.dll.config
+C:\work\Pocket-Calculator-Kata\Pocket_Calculator\bin\Debug\PocketCalculator.dll
+C:\work\Pocket-Calculator-Kata\Pocket_Calculator\bin\Debug\PocketCalculator.pdb
+C:\work\Pocket-Calculator-Kata\Pocket_Calculator\bin\Debug\nunit.framework.dll
+C:\work\Pocket-Calculator-Kata\Pocket_Calculator\bin\Debug\TechTalk.SpecFlow.dll
+C:\work\Pocket-Calculator-Kata\Pocket_Calculator\bin\Debug\nunit.framework.xml
+C:\work\Pocket-Calculator-Kata\Pocket_Calculator\obj\Debug\Pocket_Calculator.csprojResolveAssemblyReference.cache
+C:\work\Pocket-Calculator-Kata\Pocket_Calculator\obj\Debug\PocketCalculator.dll
+C:\work\Pocket-Calculator-Kata\Pocket_Calculator\obj\Debug\PocketCalculator.pdb
