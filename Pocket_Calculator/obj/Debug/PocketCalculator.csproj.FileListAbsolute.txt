@@ -1,0 +1,9 @@
+C:\work\katas\PocketCalculator\PocketCalculator\bin\Debug\PocketCalculator.dll
+C:\work\katas\PocketCalculator\PocketCalculator\bin\Debug\PocketCalculator.pdb
+C:\work\katas\PocketCalculator\PocketCalculator\obj\Debug\PocketCalculator.csprojResolveAssemblyReference.cache
+C:\work\katas\PocketCalculator\PocketCalculator\obj\Debug\PocketCalculator.dll
+C:\work\katas\PocketCalculator\PocketCalculator\obj\Debug\PocketCalculator.pdb
+C:\work\katas\PocketCalculator\PocketCalculator\bin\Debug\PocketCalculator.dll.config
+C:\work\katas\PocketCalculator\PocketCalculator\bin\Debug\nunit.framework.dll
+C:\work\katas\PocketCalculator\PocketCalculator\bin\Debug\TechTalk.SpecFlow.dll
+C:\work\katas\PocketCalculator\PocketCalculator\bin\Debug\nunit.framework.xml
