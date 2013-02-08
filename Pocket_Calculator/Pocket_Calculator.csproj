@@ -50,6 +50,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>entering_integers.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\integer_maths.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>integer_maths.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\pocket_calculator.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -64,6 +69,10 @@
     <None Include="Features\entering_integers.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>entering_integers.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\integer_maths.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>integer_maths.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\pocket_calculator.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

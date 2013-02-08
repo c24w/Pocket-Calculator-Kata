@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 
@@ -37,7 +39,30 @@ namespace Pocket_Calculator
 
 	public class PocketCalculator
 	{
-		private decimal _value;
+		private decimal _displayValue;
+		private decimal _storedValue;
+		private Command _storedCommand;
+
+		readonly Dictionary<string, Command> _mapCommand = new Dictionary<string, Command>
+		{
+			{"AC", Command.ClearAll},
+			{"/", Command.Divide},
+			{"*", Command.Multiply},
+			{"+", Command.Add},
+			{"-", Command.Subtract},
+			{"=", Command.Equals}
+		};
+
+		enum Command
+		{
+			None,
+			ClearAll,
+			Divide,
+			Multiply,
+			Add,
+			Subtract,
+			Equals
+		}
 
 		public void Process(string data)
 		{
@@ -52,56 +77,78 @@ namespace Pocket_Calculator
 			var isNumber = int.TryParse(button, out value);
 
 			if (isNumber) HandleNumber(value);
-			else HandleCommand(button);
+			else HandleCommand(_mapCommand[button]);
 		}
 
-		private void HandleCommand(string button)
+		private void HandleCommand(Command command)
 		{
-			switch (button)
+			if (command == Command.ClearAll)
 			{
-				case "AC":
-				case "=":
-					_value = 0;
-					break;
-				case "+":
-				case "-":
-				case "*":
-				case "/":
-					_value = 0;
-					break;
+				ResetDisplay();
+			}
+			else if (command == Command.Equals)
+			{
+				switch (_storedCommand)
+				{
+					case Command.None:
+						ResetDisplay();
+						break;
+					case Command.Add:
+						_displayValue += _storedValue;
+						break;
+				}
+				ClearStoredCommand();
+				ClearStoredValue();
+			}
+			else
+			{
+				_storedCommand = command;
+				StoreValue();
 			}
 		}
+
+		private void StoreValue()
+		{
+			_storedValue = _displayValue;
+			ResetDisplay();
+		}
+
+		private void ClearStoredValue() { _storedValue = 0; }
+		private void ClearStoredCommand() { _storedCommand = Command.None; }
 
 		private void HandleNumber(int value)
 		{
-			if (_value == 0) _value = value;
-			else if (ValueLength() < 10)
-			{
+			if (DisplayValueLength() < 10)
 				AppendNumber(value);
-			}
+		}
+
+		private void ResetDisplay()
+		{
+			_displayValue = 0;
 		}
 
 		private void AppendNumber(decimal value)
 		{
-			ShiftValueLeft();
-			_value += value;
+			if (_displayValue != 0)
+				ShiftValue();
+			_displayValue += value;
 		}
 
-		private void ShiftValueLeft()
+		private void ShiftValue()
 		{
-			_value *= 10;
+			_displayValue *= 10;
 		}
 
-		private int ValueLength()
+		private int DisplayValueLength()
 		{
-			return _value.ToString().Length;
+			return ((int)Math.Log10((double)_displayValue)) + 1;
 		}
 
 		public string Display
 		{
 			get
 			{
-				return _value.ToString() + '.';
+				return _displayValue.ToString() + '.';
 			}
 		}
 	}
