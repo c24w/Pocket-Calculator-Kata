@@ -7,6 +7,7 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Description = Pocket Calculator Kata
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CDF32D45-278A-46B3-AE49-6F749AB1214B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

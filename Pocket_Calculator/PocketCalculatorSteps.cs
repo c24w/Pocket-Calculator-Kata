@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 
@@ -41,28 +40,8 @@ namespace Pocket_Calculator
 	{
 		private decimal _displayValue;
 		private decimal _storedValue;
+		private Operator _storedOperator;
 		private Command _storedCommand;
-
-		readonly Dictionary<string, Command> _mapCommand = new Dictionary<string, Command>
-		{
-			{"AC", Command.ClearAll},
-			{"/", Command.Divide},
-			{"*", Command.Multiply},
-			{"+", Command.Add},
-			{"-", Command.Subtract},
-			{"=", Command.Equals}
-		};
-
-		enum Command
-		{
-			None,
-			ClearAll,
-			Divide,
-			Multiply,
-			Add,
-			Subtract,
-			Equals
-		}
 
 		public void Process(string data)
 		{
@@ -73,53 +52,101 @@ namespace Pocket_Calculator
 
 		private void HandleButton(string button)
 		{
-			int value;
-			var isNumber = int.TryParse(button, out value);
+			if (_storedCommand == Command.ClearAll)
+			{
+				ResetDisplay();
+				ClearStoredCommand();
+			}
 
-			if (isNumber) HandleNumber(value);
-			else HandleCommand(_mapCommand[button]);
+			int value;
+			var buttonIsType = int.TryParse(button, out value);
+			if (buttonIsType)
+			{
+				HandleNumber(value);
+				return;
+			}
+
+			Operator op;
+			buttonIsType = Operator.TryMap(button, out op);
+			if (buttonIsType)
+			{
+				HandleOperator(op);
+				return;
+			}
+
+			Command command;
+			buttonIsType = Command.TryMap(button, out command);
+			if (buttonIsType) HandleCommand(command);
+		}
+
+		private void HandleNumber(int value)
+		{
+			if (CanDisplayMoreDigits())
+				AppendNumber(value);
 		}
 
 		private void HandleCommand(Command command)
 		{
-			if (command == Command.ClearAll)
-			{
-				ResetDisplay();
-			}
-			else if (command == Command.Equals)
-			{
-				switch (_storedCommand)
-				{
-					case Command.None:
-						ResetDisplay();
-						break;
-					case Command.Add:
-						_displayValue += _storedValue;
-						break;
-				}
-				ClearStoredCommand();
-				ClearStoredValue();
-			}
-			else
-			{
-				_storedCommand = command;
-				StoreValue();
-			}
-		}
-
-		private void StoreValue()
-		{
-			_storedValue = _displayValue;
 			ResetDisplay();
 		}
 
-		private void ClearStoredValue() { _storedValue = 0; }
-		private void ClearStoredCommand() { _storedCommand = Command.None; }
-
-		private void HandleNumber(int value)
+		private void HandleOperator(Operator op)
 		{
-			if (DisplayValueLength() < 10)
-				AppendNumber(value);
+			switch (op.Type)
+			{
+				case Operator.Types.Equal:
+					HandleEquals();
+					break;
+				//case Operator.Types.Divide:
+				//case Operator.Types.Multiply:
+				//case Operator.Types.Add:
+				//case Operator.Types.Subtract:
+				default:
+					_storedValue = _displayValue;
+					_storedOperator = op;
+					_storedCommand = Command.ClearAll;
+					break;
+			}
+		}
+
+		private void HandleEquals()
+		{
+			if (DoingCalculation())
+			{
+				switch (_storedOperator.Type)
+				{
+					case Operator.Types.Divide:
+						_displayValue = _storedValue / _displayValue;
+						break;
+					case Operator.Types.Multiply:
+						_displayValue *= _storedValue;
+						break;
+					case Operator.Types.Add:
+						_displayValue += _storedValue;
+						break;
+					case Operator.Types.Subtract:
+						_displayValue = _storedValue - _displayValue;
+						break;
+				}
+				ClearStoredOperator();
+			}
+			else
+				_storedCommand = Command.ClearAll;
+		}
+
+		private bool DoingCalculation()
+		{
+			return _storedOperator != null;
+		}
+
+		private void ClearStoredCommand()
+		{
+			_storedCommand = null;
+		}
+
+		private void ClearStoredOperator()
+		{
+			_storedOperator = null;
 		}
 
 		private void ResetDisplay()
@@ -139,9 +166,10 @@ namespace Pocket_Calculator
 			_displayValue *= 10;
 		}
 
-		private int DisplayValueLength()
+		private bool CanDisplayMoreDigits()
 		{
-			return ((int)Math.Log10((double)_displayValue)) + 1;
+			var displayedDigits = ((int)Math.Log10((double)_displayValue)) + 1;
+			return displayedDigits < 10;
 		}
 
 		public string Display

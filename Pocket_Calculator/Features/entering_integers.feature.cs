@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace PocketCalculator.Features
+namespace Pocket_Calculator.Features
 {
     using TechTalk.SpecFlow;
     

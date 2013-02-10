@@ -7,8 +7,8 @@
     <ProjectGuid>{CDF32D45-278A-46B3-AE49-6F749AB1214B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PocketCalculator</RootNamespace>
-    <AssemblyName>PocketCalculator</AssemblyName>
+    <RootNamespace>Pocket_Calculator</RootNamespace>
+    <AssemblyName>Pocket_Calculator</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button.cs" />
     <Compile Include="Features\entering_integers.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
