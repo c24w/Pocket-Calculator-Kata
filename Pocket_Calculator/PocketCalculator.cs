@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Pocket_Calculator
 {
@@ -6,7 +7,7 @@ namespace Pocket_Calculator
 	{
 		private decimal _displayValue;
 		private decimal _currentResult;
-		private Operator _currentOperator;
+		private Operators _currentOperator;
 		private bool _shouldClearDisplayOnNextNumberInput;
 
 		public void Process(string data)
@@ -16,8 +17,23 @@ namespace Pocket_Calculator
 				HandleInput(button);
 		}
 
-		private void HandleInput(string button)
+		private void HandleInput(string button) // ? add maps as dependency and have another map which looks up a Type against a delegate function taking two params for the calculation
 		{
+			var operatorMap = new Dictionary<string, Operators>
+			{
+				{"+", Operators.Add},
+				{"-", Operators.Subtract},
+				{"/", Operators.Divide},
+				{"*", Operators.Multiply},
+				{"=", Operators.Equal}
+			};
+
+			var commandMap = new Dictionary<string, Commands>
+			{
+				{"AC", Commands.ClearAll},
+				{"+/-", Commands.FlipSign}
+			};
+
 			int value;
 			var buttonIsType = int.TryParse(button, out value);
 			if (buttonIsType)
@@ -31,17 +47,11 @@ namespace Pocket_Calculator
 				return;
 			}
 
-			Operator op;
-			buttonIsType = Operator.TryMap(button, out op);
-			if (buttonIsType)
-			{
-				HandleOperator(op);
-				return;
-			}
+			if (operatorMap.ContainsKey(button))
+				HandleOperator(operatorMap[button]);
 
-			Command command;
-			buttonIsType = Command.TryMap(button, out command);
-			if (buttonIsType) HandleCommand(command);
+			else if (commandMap.ContainsKey(button))
+				HandleCommand(commandMap[button]);
 		}
 
 		private void HandleNumber(int value)
@@ -50,11 +60,11 @@ namespace Pocket_Calculator
 				AppendNumber(value);
 		}
 
-		private void HandleOperator(Operator op)
+		private void HandleOperator(Operators op)
 		{
-			switch (op.Type)
+			switch (op)
 			{
-				case Operator.Types.Equal:
+				case Operators.Equal:
 					HandleEquals();
 					break;
 				default:
@@ -75,7 +85,7 @@ namespace Pocket_Calculator
 			else ClearDisplayOnNextNumberInput();
 		}
 
-		private void HandleCalculation(Operator op)
+		private void HandleCalculation(Operators op)
 		{
 			_currentResult = _displayValue;
 			_currentOperator = op;
@@ -89,18 +99,18 @@ namespace Pocket_Calculator
 
 		private void DisplayRunningTotal()
 		{
-			switch (_currentOperator.Type)
+			switch (_currentOperator)
 			{
-				case Operator.Types.Divide:
+				case Operators.Divide:
 					DoDivision();
 					break;
-				case Operator.Types.Multiply:
+				case Operators.Multiply:
 					DoMultiplication();
 					break;
-				case Operator.Types.Add:
+				case Operators.Add:
 					DoAddition();
 					break;
-				case Operator.Types.Subtract:
+				case Operators.Subtract:
 					DoSubtraction();
 					break;
 			}
@@ -111,14 +121,14 @@ namespace Pocket_Calculator
 		private void DoMultiplication() { _displayValue *= _currentResult; }
 		private void DoDivision() { _displayValue = _currentResult / _displayValue; }
 
-		private void HandleCommand(Command command)
+		private void HandleCommand(Commands command)
 		{
-			switch (command.Type)
+			switch (command)
 			{
-				case Command.Types.ClearAll:
+				case Commands.ClearAll:
 					ClearDisplay();
 					break;
-				case Command.Types.FlipSign:
+				case Commands.FlipSign:
 					FlipSign();
 					break;
 			}
@@ -131,12 +141,12 @@ namespace Pocket_Calculator
 
 		private bool DoingCalculation()
 		{
-			return _currentOperator != null;
+			return _currentOperator != Operators.None;
 		}
 
 		private void ClearCurrentOperator()
 		{
-			_currentOperator = null;
+			_currentOperator = Operators.None;
 		}
 
 		private void ClearDisplay()
