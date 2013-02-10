@@ -61,6 +61,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>pocket_calculator.feature</DependentUpon>
     </Compile>
+    <Compile Include="PocketCalculator.cs" />
     <Compile Include="PocketCalculatorSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
