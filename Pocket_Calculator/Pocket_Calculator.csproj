@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InputTypeMaps.cs" />
     <Compile Include="InputTypes.cs" />
     <Compile Include="Features\entering_integers.feature.cs">
       <AutoGen>True</AutoGen>
@@ -64,6 +65,7 @@
     <Compile Include="PocketCalculator.cs" />
     <Compile Include="PocketCalculatorSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Display.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

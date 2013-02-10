@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Pocket_Calculator
 {
 	public class PocketCalculator
 	{
-		private decimal _displayValue;
 		private decimal _currentResult;
-		private Operators _currentOperator;
+		private Operator _currentOperator;
 		private bool _shouldClearDisplayOnNextNumberInput;
+		private readonly Display _display = new Display();
 
 		public void Process(string data)
 		{
@@ -17,23 +16,8 @@ namespace Pocket_Calculator
 				HandleInput(button);
 		}
 
-		private void HandleInput(string button) // ? add maps as dependency and have another map which looks up a Type against a delegate function taking two params for the calculation
+		private void HandleInput(string button)
 		{
-			var operatorMap = new Dictionary<string, Operators>
-			{
-				{"+", Operators.Add},
-				{"-", Operators.Subtract},
-				{"/", Operators.Divide},
-				{"*", Operators.Multiply},
-				{"=", Operators.Equal}
-			};
-
-			var commandMap = new Dictionary<string, Commands>
-			{
-				{"AC", Commands.ClearAll},
-				{"+/-", Commands.FlipSign}
-			};
-
 			int value;
 			var buttonIsType = int.TryParse(button, out value);
 			if (buttonIsType)
@@ -47,11 +31,18 @@ namespace Pocket_Calculator
 				return;
 			}
 
+			var operatorMap = InputTypeMaps.OperatorMap;
 			if (operatorMap.ContainsKey(button))
+			{
 				HandleOperator(operatorMap[button]);
+			}
 
-			else if (commandMap.ContainsKey(button))
-				HandleCommand(commandMap[button]);
+			else
+			{
+				var commandMap = InputTypeMaps.CommandMap;
+				if (commandMap.ContainsKey(button))
+					HandleCommand(commandMap[button]);
+			}
 		}
 
 		private void HandleNumber(int value)
@@ -60,11 +51,11 @@ namespace Pocket_Calculator
 				AppendNumber(value);
 		}
 
-		private void HandleOperator(Operators op)
+		private void HandleOperator(Operator op)
 		{
 			switch (op)
 			{
-				case Operators.Equal:
+				case Operator.Equal:
 					HandleEquals();
 					break;
 				default:
@@ -85,9 +76,9 @@ namespace Pocket_Calculator
 			else ClearDisplayOnNextNumberInput();
 		}
 
-		private void HandleCalculation(Operators op)
+		private void HandleCalculation(Operator op)
 		{
-			_currentResult = _displayValue;
+			_currentResult = _display.Value;
 			_currentOperator = op;
 			ClearDisplayOnNextNumberInput();
 		}
@@ -101,25 +92,37 @@ namespace Pocket_Calculator
 		{
 			switch (_currentOperator)
 			{
-				case Operators.Divide:
+				case Operator.Divide:
 					DoDivision();
 					break;
-				case Operators.Multiply:
+				case Operator.Multiply:
 					DoMultiplication();
 					break;
-				case Operators.Add:
+				case Operator.Add:
 					DoAddition();
 					break;
-				case Operators.Subtract:
+				case Operator.Subtract:
 					DoSubtraction();
 					break;
 			}
 		}
 
-		private void DoSubtraction() { _displayValue = _currentResult - _displayValue; }
-		private void DoAddition() { _displayValue += _currentResult; }
-		private void DoMultiplication() { _displayValue *= _currentResult; }
-		private void DoDivision() { _displayValue = _currentResult / _displayValue; }
+		private void DoSubtraction()
+		{
+			_display.Value = _currentResult - _display.Value;
+		}
+		private void DoAddition()
+		{
+			_display.Value += _currentResult;
+		}
+		private void DoMultiplication()
+		{
+			_display.Value *= _currentResult;
+		}
+		private void DoDivision()
+		{
+			_display.Value = _currentResult / _display.Value;
+		}
 
 		private void HandleCommand(Commands command)
 		{
@@ -136,39 +139,39 @@ namespace Pocket_Calculator
 
 		private void FlipSign()
 		{
-			_displayValue = 0 - _displayValue;
+			_display.Value = 0 - _display.Value;
 		}
 
 		private bool DoingCalculation()
 		{
-			return _currentOperator != Operators.None;
+			return _currentOperator != Operator.None;
 		}
 
 		private void ClearCurrentOperator()
 		{
-			_currentOperator = Operators.None;
+			_currentOperator = Operator.None;
 		}
 
 		private void ClearDisplay()
 		{
-			_displayValue = 0;
+			_display.Value = 0;
 		}
 
 		private void AppendNumber(decimal value)
 		{
-			if (_displayValue != 0)
+			if (_display.Value != 0)
 				ShiftValue();
-			_displayValue += value;
+			_display.Value += value;
 		}
 
 		private void ShiftValue()
 		{
-			_displayValue *= 10;
+			_display.Value *= 10;
 		}
 
 		private bool CanDisplayMoreDigits()
 		{
-			var displayedDigits = ((int)Math.Log10((double)_displayValue)) + 1;
+			var displayedDigits = ((int)Math.Log10((double)_display.Value)) + 1;
 			return displayedDigits < 10;
 		}
 
@@ -176,7 +179,7 @@ namespace Pocket_Calculator
 		{
 			get
 			{
-				return String.Format("{0}.", _displayValue);
+				return String.Format("{0}.", _display.Value);
 			}
 		}
 	}

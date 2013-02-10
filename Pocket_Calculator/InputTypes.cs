@@ -1,6 +1,6 @@
 ﻿namespace Pocket_Calculator
 {
-	internal enum Operators
+	public enum Operator
 	{
 		None,
 		Divide,
@@ -10,7 +10,7 @@
 		Equal
 	}
 
-	internal enum Commands
+	public enum Commands
 	{
 		ClearAll,
 		FlipSign
