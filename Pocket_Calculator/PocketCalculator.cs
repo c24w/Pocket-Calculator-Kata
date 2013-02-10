@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace Pocket_Calculator
 {
@@ -9,39 +10,38 @@ namespace Pocket_Calculator
 		private bool _shouldClearDisplayOnNextNumberInput;
 		private readonly Display _display = new Display();
 
-		public void Process(string data)
+		public void Process(string inputData)
 		{
-			var buttons = data.Split(' ');
-			foreach (var button in buttons)
-				HandleInput(button);
+			var inputs = inputData.Split(' ');
+			foreach (var input in inputs)
+				HandleInput(input);
 		}
 
-		private void HandleInput(string button)
+		private void HandleInput(string input)
 		{
-			int value;
-			var buttonIsType = int.TryParse(button, out value);
-			if (buttonIsType)
+			if(Regex.IsMatch(input, "^[0-9]$"))
 			{
 				if (_shouldClearDisplayOnNextNumberInput)
 				{
 					ClearDisplay();
 					_shouldClearDisplayOnNextNumberInput = false;
 				}
-				HandleNumber(value);
+				HandleNumber(int.Parse(input));
 				return;
 			}
 
 			var operatorMap = InputTypeMaps.OperatorMap;
-			if (operatorMap.ContainsKey(button))
+			if (operatorMap.ContainsKey(input))
 			{
-				HandleOperator(operatorMap[button]);
+				HandleOperator(operatorMap[input]);
 			}
 
 			else
 			{
 				var commandMap = InputTypeMaps.CommandMap;
-				if (commandMap.ContainsKey(button))
-					HandleCommand(commandMap[button]);
+				if (commandMap.ContainsKey(input))
+					HandleCommand(commandMap[input]);
+				else throw new ArgumentException("Could not parse input: " + input);
 			}
 		}
 
