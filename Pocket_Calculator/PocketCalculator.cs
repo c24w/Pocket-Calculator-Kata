@@ -7,27 +7,26 @@ namespace Pocket_Calculator
 		private decimal _displayValue;
 		private decimal _currentResult;
 		private Operator _currentOperator;
-		private bool _clearDisplayOnNextInput;
+		private bool _shouldClearDisplayOnNextNumberInput;
 
 		public void Process(string data)
 		{
 			var buttons = data.Split(' ');
 			foreach (var button in buttons)
-				HandleButton(button);
+				HandleInput(button);
 		}
 
-		private void HandleButton(string button)
+		private void HandleInput(string button)
 		{
-			if (_clearDisplayOnNextInput)
-			{
-				ClearDisplay();
-				_clearDisplayOnNextInput = false;
-			}
-
 			int value;
 			var buttonIsType = int.TryParse(button, out value);
 			if (buttonIsType)
 			{
+				if (_shouldClearDisplayOnNextNumberInput)
+				{
+					ClearDisplay();
+					_shouldClearDisplayOnNextNumberInput = false;
+				}
 				HandleNumber(value);
 				return;
 			}
@@ -71,17 +70,21 @@ namespace Pocket_Calculator
 			if (DoingCalculation())
 			{
 				DisplayRunningTotal();
-				ClearStoredOperator();
+				ClearCurrentOperator();
 			}
-			else
-				_clearDisplayOnNextInput = true;
+			else ClearDisplayOnNextNumberInput();
 		}
 
 		private void HandleCalculation(Operator op)
 		{
 			_currentResult = _displayValue;
 			_currentOperator = op;
-			_clearDisplayOnNextInput = true;
+			ClearDisplayOnNextNumberInput();
+		}
+
+		private void ClearDisplayOnNextNumberInput()
+		{
+			_shouldClearDisplayOnNextNumberInput = true;
 		}
 
 		private void DisplayRunningTotal()
@@ -89,19 +92,24 @@ namespace Pocket_Calculator
 			switch (_currentOperator.Type)
 			{
 				case Operator.Types.Divide:
-					_displayValue = _currentResult / _displayValue;
+					DoDivision();
 					break;
 				case Operator.Types.Multiply:
-					_displayValue *= _currentResult;
+					DoMultiplication();
 					break;
 				case Operator.Types.Add:
-					_displayValue += _currentResult;
+					DoAddition();
 					break;
 				case Operator.Types.Subtract:
-					_displayValue = _currentResult - _displayValue;
+					DoSubtraction();
 					break;
 			}
 		}
+
+		private void DoSubtraction() { _displayValue = _currentResult - _displayValue; }
+		private void DoAddition() { _displayValue += _currentResult; }
+		private void DoMultiplication() { _displayValue *= _currentResult; }
+		private void DoDivision() { _displayValue = _currentResult / _displayValue; }
 
 		private void HandleCommand(Command command)
 		{
@@ -126,7 +134,7 @@ namespace Pocket_Calculator
 			return _currentOperator != null;
 		}
 
-		private void ClearStoredOperator()
+		private void ClearCurrentOperator()
 		{
 			_currentOperator = null;
 		}
