@@ -61,7 +61,7 @@ namespace Pocket_Calculator
 		public enum Types
 		{
 			ClearAll,
-			PlusMinus
+			FlipSign
 		}
 
 		public readonly Types Type;
@@ -78,7 +78,7 @@ namespace Pocket_Calculator
 			var typeMap = new Dictionary<string, Types>
 			{
 				{"AC", Types.ClearAll},
-				{"+/-", Types.PlusMinus}
+				{"+/-", Types.FlipSign}
 			};
 			result = new Command(typeMap[command]);
 			return typeMap.ContainsKey(command);

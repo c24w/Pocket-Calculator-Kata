@@ -5,9 +5,9 @@ namespace Pocket_Calculator
 	public class PocketCalculator
 	{
 		private decimal _displayValue;
-		private decimal _runningTotal;
-		private Operator _storedOperator;
-		private Command _storedCommand;
+		private decimal _currentResult;
+		private Operator _currentOperator;
+		private bool _clearDisplayOnNextInput;
 
 		public void Process(string data)
 		{
@@ -18,10 +18,10 @@ namespace Pocket_Calculator
 
 		private void HandleButton(string button)
 		{
-			if (_storedCommand == Command.ClearAll)
+			if (_clearDisplayOnNextInput)
 			{
-				ResetDisplay();
-				ClearStoredCommand();
+				ClearDisplay();
+				_clearDisplayOnNextInput = false;
 			}
 
 			int value;
@@ -60,7 +60,7 @@ namespace Pocket_Calculator
 					break;
 				default:
 					if (DoingCalculation())
-						ShowRunningTotal();
+						DisplayRunningTotal();
 					HandleCalculation(op);
 					break;
 			}
@@ -70,35 +70,35 @@ namespace Pocket_Calculator
 		{
 			if (DoingCalculation())
 			{
-				ShowRunningTotal();
+				DisplayRunningTotal();
 				ClearStoredOperator();
 			}
 			else
-				_storedCommand = Command.ClearAll;
+				_clearDisplayOnNextInput = true;
 		}
 
 		private void HandleCalculation(Operator op)
 		{
-			_runningTotal = _displayValue;
-			_storedOperator = op;
-			_storedCommand = Command.ClearAll;
+			_currentResult = _displayValue;
+			_currentOperator = op;
+			_clearDisplayOnNextInput = true;
 		}
 
-		private void ShowRunningTotal()
+		private void DisplayRunningTotal()
 		{
-			switch (_storedOperator.Type)
+			switch (_currentOperator.Type)
 			{
 				case Operator.Types.Divide:
-					_displayValue = _runningTotal / _displayValue;
+					_displayValue = _currentResult / _displayValue;
 					break;
 				case Operator.Types.Multiply:
-					_displayValue *= _runningTotal;
+					_displayValue *= _currentResult;
 					break;
 				case Operator.Types.Add:
-					_displayValue += _runningTotal;
+					_displayValue += _currentResult;
 					break;
 				case Operator.Types.Subtract:
-					_displayValue = _runningTotal - _displayValue;
+					_displayValue = _currentResult - _displayValue;
 					break;
 			}
 		}
@@ -108,9 +108,9 @@ namespace Pocket_Calculator
 			switch (command.Type)
 			{
 				case Command.Types.ClearAll:
-					ResetDisplay();
+					ClearDisplay();
 					break;
-				case Command.Types.PlusMinus:
+				case Command.Types.FlipSign:
 					FlipSign();
 					break;
 			}
@@ -123,20 +123,15 @@ namespace Pocket_Calculator
 
 		private bool DoingCalculation()
 		{
-			return _storedOperator != null;
-		}
-
-		private void ClearStoredCommand()
-		{
-			_storedCommand = null;
+			return _currentOperator != null;
 		}
 
 		private void ClearStoredOperator()
 		{
-			_storedOperator = null;
+			_currentOperator = null;
 		}
 
-		private void ResetDisplay()
+		private void ClearDisplay()
 		{
 			_displayValue = 0;
 		}
