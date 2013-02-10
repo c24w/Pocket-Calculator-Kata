@@ -13,305 +13,305 @@
 #pragma warning disable
 namespace Pocket_Calculator.Features
 {
-    using TechTalk.SpecFlow;
-    
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
-    [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Integer maths")]
-    public partial class IntegerMathsFeature
-    {
-        
-        private static TechTalk.SpecFlow.ITestRunner testRunner;
-        
+	using TechTalk.SpecFlow;
+
+
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
+	[System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+	[NUnit.Framework.TestFixtureAttribute()]
+	[NUnit.Framework.DescriptionAttribute("Integer maths")]
+	public partial class IntegerMathsFeature
+	{
+
+		private static TechTalk.SpecFlow.ITestRunner testRunner;
+
 #line 1 "integer_maths.feature"
 #line hidden
-        
-        [NUnit.Framework.TestFixtureSetUpAttribute()]
-        public virtual void FeatureSetup()
-        {
-            testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Integer maths", "Somebody probably bought this calculator in the hope it\r\nwould help them do sums." +
-                    " We should at least be able to add\r\nwhole numbers together.", ProgrammingLanguage.CSharp, ((string[])(null)));
-            testRunner.OnFeatureStart(featureInfo);
-        }
-        
-        [NUnit.Framework.TestFixtureTearDownAttribute()]
-        public virtual void FeatureTearDown()
-        {
-            testRunner.OnFeatureEnd();
-            testRunner = null;
-        }
-        
-        [NUnit.Framework.SetUpAttribute()]
-        public virtual void TestInitialize()
-        {
-        }
-        
-        [NUnit.Framework.TearDownAttribute()]
-        public virtual void ScenarioTearDown()
-        {
-            testRunner.OnScenarioEnd();
-        }
-        
-        public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
-        {
-            testRunner.OnScenarioStart(scenarioInfo);
-        }
-        
-        public virtual void ScenarioCleanup()
-        {
-            testRunner.CollectScenarioErrors();
-        }
-        
-        public virtual void FeatureBackground()
-        {
+
+		[NUnit.Framework.TestFixtureSetUpAttribute()]
+		public virtual void FeatureSetup()
+		{
+			testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
+			TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Integer maths", "Somebody probably bought this calculator in the hope it\r\nwould help them do sums." +
+					" We should at least be able to add\r\nwhole numbers together.", ProgrammingLanguage.CSharp, ((string[])(null)));
+			testRunner.OnFeatureStart(featureInfo);
+		}
+
+		[NUnit.Framework.TestFixtureTearDownAttribute()]
+		public virtual void FeatureTearDown()
+		{
+			testRunner.OnFeatureEnd();
+			testRunner = null;
+		}
+
+		[NUnit.Framework.SetUpAttribute()]
+		public virtual void TestInitialize()
+		{
+		}
+
+		[NUnit.Framework.TearDownAttribute()]
+		public virtual void ScenarioTearDown()
+		{
+			testRunner.OnScenarioEnd();
+		}
+
+		public virtual void ScenarioSetup(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
+		{
+			testRunner.OnScenarioStart(scenarioInfo);
+		}
+
+		public virtual void ScenarioCleanup()
+		{
+			testRunner.CollectScenarioErrors();
+		}
+
+		public virtual void FeatureBackground()
+		{
 #line 6
-  #line 7
-    testRunner.Given("I have a pocket calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 7
+			testRunner.Given("I have a pocket calculator", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 8
-    testRunner.And("it is turned on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+			testRunner.And("it is turned on", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Basic addition")]
-        public virtual void BasicAddition()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Basic addition", ((string[])(null)));
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Basic addition")]
+		public virtual void BasicAddition()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Basic addition", ((string[])(null)));
 #line 12
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 13
-    testRunner.When("I press \"1 2 3 + 4 5 6 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"1 2 3 + 4 5 6 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 14
-    testRunner.Then("the display shows \"579.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"579.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Chaining additions")]
-        public virtual void ChainingAdditions()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Chaining additions", ((string[])(null)));
+			this.ScenarioCleanup();
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Chaining additions")]
+		public virtual void ChainingAdditions()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Chaining additions", ((string[])(null)));
 #line 16
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 17
-    testRunner.When("I press \"1 2 3 + 4 5 6 +\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"1 2 3 + 4 5 6 +\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 18
-    testRunner.Then("the display shows \"579.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"579.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 19
-    testRunner.When("I press \"7 8 9 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"7 8 9 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 20
-    testRunner.Then("the display shows \"1368.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"1368.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Continuing to add after calculating an answer")]
-        public virtual void ContinuingToAddAfterCalculatingAnAnswer()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Continuing to add after calculating an answer", ((string[])(null)));
+			this.ScenarioCleanup();
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Continuing to add after calculating an answer")]
+		public virtual void ContinuingToAddAfterCalculatingAnAnswer()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Continuing to add after calculating an answer", ((string[])(null)));
 #line 22
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 23
-    testRunner.When("I press \"1 2 3 + 4 5 6 = + 7 8 9 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"1 2 3 + 4 5 6 = + 7 8 9 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 24
-    testRunner.Then("the display shows \"1368.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"1368.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Adding to the initial zero")]
-        public virtual void AddingToTheInitialZero()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding to the initial zero", ((string[])(null)));
+			this.ScenarioCleanup();
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Adding to the initial zero")]
+		public virtual void AddingToTheInitialZero()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding to the initial zero", ((string[])(null)));
 #line 26
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 30
-    testRunner.When("I press \"+ 1 2 3 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"+ 1 2 3 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 31
-    testRunner.Then("the display shows \"123.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"123.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Basic subtraction")]
-        public virtual void BasicSubtraction()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Basic subtraction", ((string[])(null)));
+			this.ScenarioCleanup();
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Basic subtraction")]
+		public virtual void BasicSubtraction()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Basic subtraction", ((string[])(null)));
 #line 35
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 36
-    testRunner.When("I press \"4 5 6 - 1 2 3 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"4 5 6 - 1 2 3 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 37
-    testRunner.Then("the display shows \"333.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"333.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Chaining subtractions")]
-        public virtual void ChainingSubtractions()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Chaining subtractions", ((string[])(null)));
+			this.ScenarioCleanup();
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Chaining subtractions")]
+		public virtual void ChainingSubtractions()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Chaining subtractions", ((string[])(null)));
 #line 39
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 40
-    testRunner.When("I press \"4 5 6 - 1 2 3 -\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"4 5 6 - 1 2 3 -\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 41
-    testRunner.Then("the display shows \"333.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"333.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 42
-    testRunner.When("I press \"3 2 1 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"3 2 1 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 43
-    testRunner.Then("the display shows \"12.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"12.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Continuing to subtract after calculating an answer")]
-        public virtual void ContinuingToSubtractAfterCalculatingAnAnswer()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Continuing to subtract after calculating an answer", ((string[])(null)));
+			this.ScenarioCleanup();
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Continuing to subtract after calculating an answer")]
+		public virtual void ContinuingToSubtractAfterCalculatingAnAnswer()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Continuing to subtract after calculating an answer", ((string[])(null)));
 #line 45
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 46
-    testRunner.When("I press \"4 5 6 - 1 2 3 = - 3 2 1 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"4 5 6 - 1 2 3 = - 3 2 1 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 47
-    testRunner.Then("the display shows \"12.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"12.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Subtracting from the initial zero")]
-        public virtual void SubtractingFromTheInitialZero()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Subtracting from the initial zero", ((string[])(null)));
+			this.ScenarioCleanup();
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Subtracting from the initial zero")]
+		public virtual void SubtractingFromTheInitialZero()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Subtracting from the initial zero", ((string[])(null)));
 #line 49
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 53
-    testRunner.When("I press \"- 1 2 3 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"- 1 2 3 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 54
-    testRunner.Then("the display shows \"-123.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"-123.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Basic multiplication")]
-        public virtual void BasicMultiplication()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Basic multiplication", ((string[])(null)));
+			this.ScenarioCleanup();
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Basic multiplication")]
+		public virtual void BasicMultiplication()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Basic multiplication", ((string[])(null)));
 #line 58
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 59
-    testRunner.When("I press \"5 * 6 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"5 * 6 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 60
-    testRunner.Then("the display shows \"30.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"30.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Basic division")]
-        public virtual void BasicDivision()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Basic division", ((string[])(null)));
+			this.ScenarioCleanup();
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Basic division")]
+		public virtual void BasicDivision()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Basic division", ((string[])(null)));
 #line 64
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 65
-    testRunner.When("I press \"5 6 / 8 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"5 6 / 8 =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 66
-    testRunner.Then("the display shows \"7.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"7.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Adding a negative number to a positive one")]
-        public virtual void AddingANegativeNumberToAPositiveOne()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding a negative number to a positive one", ((string[])(null)));
+			this.ScenarioCleanup();
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Adding a negative number to a positive one")]
+		public virtual void AddingANegativeNumberToAPositiveOne()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Adding a negative number to a positive one", ((string[])(null)));
 #line 70
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 71
-    testRunner.When("I press \"1 2 3 + 6 7 +/- =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"1 2 3 + 6 7 +/- =\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 72
-    testRunner.Then("the display shows \"56.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"56.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Negating zero")]
-        public virtual void NegatingZero()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Negating zero", ((string[])(null)));
+			this.ScenarioCleanup();
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Negating zero")]
+		public virtual void NegatingZero()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Negating zero", ((string[])(null)));
 #line 74
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 77
-    testRunner.When("I press \"+/-\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"+/-\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 78
-    testRunner.Then("the display shows \"0.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"0.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Pressing \"+/-\" after an operator, but before the next number")]
-        public virtual void Pressing_AfterAnOperatorButBeforeTheNextNumber()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Pressing \"+/-\" after an operator, but before the next number", ((string[])(null)));
+			this.ScenarioCleanup();
+		}
+
+		[NUnit.Framework.TestAttribute()]
+		[NUnit.Framework.DescriptionAttribute("Pressing \"+/-\" after an operator, but before the next number")]
+		public virtual void Pressing_AfterAnOperatorButBeforeTheNextNumber()
+		{
+			TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Pressing \"+/-\" after an operator, but before the next number", ((string[])(null)));
 #line 80
-  this.ScenarioSetup(scenarioInfo);
+			this.ScenarioSetup(scenarioInfo);
 #line 6
-  this.FeatureBackground();
+			this.FeatureBackground();
 #line 87
-    testRunner.When("I press \"1 2 3 + +/-\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"1 2 3 + +/-\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 88
-    testRunner.Then("the display shows \"-123.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"-123.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 89
-    testRunner.When("I press \"7\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"7\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 90
-    testRunner.Then("the display shows \"7.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"7.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 91
-    testRunner.When("I press \"=\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+			testRunner.When("I press \"=\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 92
-    testRunner.Then("the display shows \"130.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+			testRunner.Then("the display shows \"130.\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            this.ScenarioCleanup();
-        }
-    }
+			this.ScenarioCleanup();
+		}
+	}
 }
 #pragma warning restore
 #endregion

@@ -85,11 +85,6 @@ namespace Pocket_Calculator
 				AppendNumber(value);
 		}
 
-		private void HandleCommand(Command command)
-		{
-			ResetDisplay();
-		}
-
 		private void HandleOperator(Operator op)
 		{
 			switch (op.Type)
@@ -97,16 +92,30 @@ namespace Pocket_Calculator
 				case Operator.Types.Equal:
 					HandleEquals();
 					break;
-				//case Operator.Types.Divide:
-				//case Operator.Types.Multiply:
-				//case Operator.Types.Add:
-				//case Operator.Types.Subtract:
 				default:
 					_storedValue = _displayValue;
 					_storedOperator = op;
 					_storedCommand = Command.ClearAll;
 					break;
 			}
+		}
+
+		private void HandleCommand(Command command)
+		{
+			switch (command.Type)
+			{
+				case Command.Types.ClearAll:
+					ResetDisplay();
+					break;
+				case Command.Types.PlusMinus:
+					FlipSign();
+					break;
+			}
+		}
+
+		private void FlipSign()
+		{
+			_displayValue = 0 - _displayValue;
 		}
 
 		private void HandleEquals()

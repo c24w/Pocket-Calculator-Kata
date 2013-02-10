@@ -58,25 +58,27 @@ namespace Pocket_Calculator
 
 	class Command
 	{
-		public enum CommandType
+		public enum Types
 		{
-			ClearAll
+			ClearAll,
+			PlusMinus
 		}
 
-		public readonly CommandType Type;
+		public readonly Types Type;
 
-		public readonly static Command ClearAll = new Command(CommandType.ClearAll);
+		public readonly static Command ClearAll = new Command(Types.ClearAll);
 
-		public Command(CommandType type)
+		public Command(Types type)
 		{
 			Type = type;
 		}
 
 		public static bool TryMap(string command, out Command result)
 		{
-			var typeMap = new Dictionary<string, CommandType>
+			var typeMap = new Dictionary<string, Types>
 			{
-				{"AC", CommandType.ClearAll}
+				{"AC", Types.ClearAll},
+				{"+/-", Types.PlusMinus}
 			};
 			result = new Command(typeMap[command]);
 			return typeMap.ContainsKey(command);
