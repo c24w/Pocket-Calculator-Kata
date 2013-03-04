@@ -15,7 +15,12 @@ namespace Pocket_Calculator
 
 		public string Display
 		{
-			get { return String.Format("{0}.", _display.Value); }
+			get
+			{
+				if(_display.Value == (int) _display.Value)
+					return String.Format("{0}.", _display.Value);
+				return _display.Value.ToString();
+			}
 		}
 
 		public PocketCalculator(Dictionary<string, Commands> commandMap, Dictionary<string, Operator> operatorMap)
@@ -201,7 +206,13 @@ namespace Pocket_Calculator
 
 		private void SquareRoot()
 		{
-			_display.Value = (decimal) Math.Sqrt((double) _display.Value);
+			var value = (decimal) Math.Sqrt((double) _display.Value);
+			var valueString = value.ToString();
+			if (valueString.Length > 10)
+			{
+				valueString = valueString.Substring(0, 11);
+			}
+			_display.Value = decimal.Parse(valueString);
 		}
 
 		private void MemoryPlus()
