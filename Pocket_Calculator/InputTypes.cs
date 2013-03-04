@@ -14,6 +14,8 @@
 	{
 		Clear,
 		ClearAll,
-		FlipSign
+		FlipSign,
+		MemoryPlus,
+		MemoryRecall
 	}
 }

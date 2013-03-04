@@ -50,6 +50,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>clear.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\memory.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>memory.feature</DependentUpon>
+    </Compile>
     <Compile Include="InputTypes.cs" />
     <Compile Include="Features\entering_integers.feature.cs">
       <AutoGen>True</AutoGen>
@@ -85,6 +90,10 @@
     <None Include="Features\integer_maths.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>integer_maths.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\memory.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>memory.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\pocket_calculator.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

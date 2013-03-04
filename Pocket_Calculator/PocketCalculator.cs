@@ -12,6 +12,7 @@ namespace Pocket_Calculator
 		private readonly Display _display = new Display();
 		private readonly Dictionary<string, Commands> _commandMap;
 		private readonly Dictionary<string, Operator> _operatorMap;
+		private decimal _memory;
 
 		public string Display
 		{
@@ -184,7 +185,24 @@ namespace Pocket_Calculator
 				case Commands.FlipSign:
 					FlipSign();
 					break;
+				case Commands.MemoryPlus:
+					MemoryPlus();
+					break;
+				case Commands.MemoryRecall:
+					RecallMemory();
+					break;
 			}
+		}
+
+		private void MemoryPlus()
+		{
+			_memory += _display.Value;
+			_clearDisplayOnNumberInput = true;
+		}
+
+		private void RecallMemory()
+		{
+			_display.Value = _memory;
 		}
 
 		private void ClearPendingCalculation()
