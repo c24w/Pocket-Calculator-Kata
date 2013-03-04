@@ -8,10 +8,15 @@ namespace Pocket_Calculator
 	{
 		private decimal _currentResult;
 		private Operator _currentOperator;
-		private bool _clearDisplayOnNextNumberInput;
+		private bool _clearDisplayOnNumberInput;
 		private readonly Display _display = new Display();
 		private readonly Dictionary<string, Commands> _commandMap;
 		private readonly Dictionary<string, Operator> _operatorMap;
+
+		public string Display
+		{
+			get { return String.Format("{0}.", _display.Value); }
+		}
 
 		public PocketCalculator(Dictionary<string, Commands> commandMap, Dictionary<string, Operator> operatorMap)
 		{
@@ -30,27 +35,31 @@ namespace Pocket_Calculator
 		{
 			if (IsNumberSequence(input))
 			{
-				if (_clearDisplayOnNextNumberInput)
-				{
-					ClearDisplay();
-					_clearDisplayOnNextNumberInput = false;
-				}
-				HandleNumber(int.Parse(input));
+				HandleNumberSequence(input);
 				return;
 			}
 
 			if (IsOperator(input))
 			{
-				HandleOperator(_operatorMap[input]);
+				HandleOperator(MapToOperator(input));
 				return;
 			}
 
 			if (IsCommand(input))
 			{
-				HandleCommand(MapCommand(input));
+				HandleCommand(MapToCommand(input));
 			}
 
 			else throw new ArgumentException("Could not parse input: " + input);
+		}
+
+		private void ClearDisplayIfRequired()
+		{
+			if (_clearDisplayOnNumberInput)
+			{
+				ClearDisplay();
+				_clearDisplayOnNumberInput = false;
+			}
 		}
 
 		private bool IsOperator(string input)
@@ -58,9 +67,9 @@ namespace Pocket_Calculator
 			return _operatorMap.ContainsKey(input);
 		}
 
-		private Commands MapCommand(string input)
+		private Operator MapToOperator(string input)
 		{
-			return _commandMap[input];
+			return _operatorMap[input];
 		}
 
 		private bool IsCommand(string input)
@@ -68,15 +77,21 @@ namespace Pocket_Calculator
 			return _commandMap.ContainsKey(input);
 		}
 
+		private Commands MapToCommand(string input)
+		{
+			return _commandMap[input];
+		}
+
 		private static bool IsNumberSequence(string input)
 		{
 			return Regex.IsMatch(input, "^[0-9]$");
 		}
 
-		private void HandleNumber(int value)
+		private void HandleNumberSequence(string value)
 		{
+			ClearDisplayIfRequired();
 			if (CanDisplayMoreDigits())
-				AppendNumber(value);
+				AppendNumberSequence(value);
 		}
 
 		private void HandleOperator(Operator op)
@@ -113,7 +128,7 @@ namespace Pocket_Calculator
 
 		private void ClearDisplayOnNextNumberInput()
 		{
-			_clearDisplayOnNextNumberInput = true;
+			_clearDisplayOnNumberInput = true;
 		}
 
 		private void DisplayRunningTotal()
@@ -139,14 +154,17 @@ namespace Pocket_Calculator
 		{
 			_display.Value = _currentResult - _display.Value;
 		}
+
 		private void DoAddition()
 		{
 			_display.Value += _currentResult;
 		}
+
 		private void DoMultiplication()
 		{
 			_display.Value *= _currentResult;
 		}
+
 		private void DoDivision()
 		{
 			_display.Value = _currentResult / _display.Value;
@@ -185,10 +203,11 @@ namespace Pocket_Calculator
 			_display.Value = 0;
 		}
 
-		private void AppendNumber(decimal value)
+		private void AppendNumberSequence(string numberSequence)
 		{
 			if (_display.Value != 0)
 				ShiftValue();
+			var value = int.Parse(numberSequence);
 			_display.Value += value;
 		}
 
@@ -201,14 +220,6 @@ namespace Pocket_Calculator
 		{
 			var displayedDigits = ((int)Math.Log10((double)_display.Value)) + 1;
 			return displayedDigits < 10;
-		}
-
-		public string Display
-		{
-			get
-			{
-				return String.Format("{0}.", _display.Value);
-			}
 		}
 	}
 }
