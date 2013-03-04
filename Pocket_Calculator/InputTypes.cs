@@ -12,6 +12,7 @@
 
 	public enum Commands
 	{
+		Clear,
 		ClearAll,
 		FlipSign
 	}

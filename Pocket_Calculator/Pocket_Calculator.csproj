@@ -45,6 +45,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\clear.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>clear.feature</DependentUpon>
+    </Compile>
     <Compile Include="InputTypes.cs" />
     <Compile Include="Features\entering_integers.feature.cs">
       <AutoGen>True</AutoGen>
@@ -69,6 +74,10 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="Features\App.config" />
+    <None Include="Features\clear.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>clear.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\entering_integers.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>entering_integers.feature.cs</LastGenOutput>

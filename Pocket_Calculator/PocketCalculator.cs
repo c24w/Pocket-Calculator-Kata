@@ -6,7 +6,7 @@ namespace Pocket_Calculator
 {
 	public class PocketCalculator
 	{
-		private decimal _currentResult;
+		private decimal _pendingCalculation;
 		private Operator _currentOperator;
 		private bool _clearDisplayOnNumberInput;
 		private readonly Display _display = new Display();
@@ -121,7 +121,7 @@ namespace Pocket_Calculator
 
 		private void HandleCalculation(Operator op)
 		{
-			_currentResult = _display.Value;
+			_pendingCalculation = _display.Value;
 			_currentOperator = op;
 			ClearDisplayOnNextNumberInput();
 		}
@@ -152,35 +152,45 @@ namespace Pocket_Calculator
 
 		private void DoSubtraction()
 		{
-			_display.Value = _currentResult - _display.Value;
+			_display.Value = _pendingCalculation - _display.Value;
 		}
 
 		private void DoAddition()
 		{
-			_display.Value += _currentResult;
+			_display.Value += _pendingCalculation;
 		}
 
 		private void DoMultiplication()
 		{
-			_display.Value *= _currentResult;
+			_display.Value *= _pendingCalculation;
 		}
 
 		private void DoDivision()
 		{
-			_display.Value = _currentResult / _display.Value;
+			_display.Value = _pendingCalculation / _display.Value;
 		}
 
 		private void HandleCommand(Commands command)
 		{
 			switch (command)
 			{
+				case Commands.Clear:
+					ClearDisplay();
+					break;
 				case Commands.ClearAll:
 					ClearDisplay();
+					ClearPendingCalculation();
 					break;
 				case Commands.FlipSign:
 					FlipSign();
 					break;
 			}
+		}
+
+		private void ClearPendingCalculation()
+		{
+			_pendingCalculation = 0;
+			_currentOperator = Operator.None;
 		}
 
 		private void FlipSign()
