@@ -100,7 +100,7 @@ namespace Pocket_Calculator
 			switch (op)
 			{
 				case Operator.Equal:
-					HandleEquals();
+					DoEquals();
 					break;
 				default:
 					if (DoingCalculation())
@@ -110,7 +110,7 @@ namespace Pocket_Calculator
 			}
 		}
 
-		private void HandleEquals()
+		private void DoEquals()
 		{
 			if (DoingCalculation())
 			{
@@ -188,6 +188,9 @@ namespace Pocket_Calculator
 				case Commands.MemoryPlus:
 					MemoryPlus();
 					break;
+				case Commands.MemoryMinus:
+					MemoryMinus();
+					break;
 				case Commands.MemoryRecall:
 					RecallMemory();
 					break;
@@ -196,7 +199,15 @@ namespace Pocket_Calculator
 
 		private void MemoryPlus()
 		{
+			if (DoingCalculation()) DoEquals();
 			_memory += _display.Value;
+			_clearDisplayOnNumberInput = true;
+		}
+
+		private void MemoryMinus()
+		{
+			if (DoingCalculation()) DoEquals();
+			_memory -= _display.Value;
 			_clearDisplayOnNumberInput = true;
 		}
 

@@ -16,6 +16,7 @@
 		ClearAll,
 		FlipSign,
 		MemoryPlus,
+		MemoryMinus,
 		MemoryRecall
 	}
 }

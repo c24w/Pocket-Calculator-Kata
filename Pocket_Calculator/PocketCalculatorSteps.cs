@@ -19,7 +19,12 @@ namespace Pocket_Calculator
 
 			var commandMap = new Dictionary<string, Commands>
 			{
-				{"AC", Commands.ClearAll}, {"C", Commands.Clear}, {"+/-", Commands.FlipSign}, {"M+", Commands.MemoryPlus}, {"MR", Commands.MemoryRecall}
+				{"AC", Commands.ClearAll},
+				{"C", Commands.Clear},
+				{"+/-", Commands.FlipSign},
+				{"M+", Commands.MemoryPlus},
+				{"M-", Commands.MemoryMinus},
+				{"MR", Commands.MemoryRecall}
 			};
 
 			_pocketCalculator = new PocketCalculator(commandMap, operatorMap);
