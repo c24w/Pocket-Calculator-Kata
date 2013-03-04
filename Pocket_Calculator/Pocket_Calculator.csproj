@@ -45,7 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InputTypeMaps.cs" />
+    <Compile Include="InputMaps.cs" />
     <Compile Include="InputTypes.cs" />
     <Compile Include="Features\entering_integers.feature.cs">
       <AutoGen>True</AutoGen>

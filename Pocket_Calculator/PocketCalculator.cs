@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Pocket_Calculator
@@ -7,8 +8,16 @@ namespace Pocket_Calculator
 	{
 		private decimal _currentResult;
 		private Operator _currentOperator;
-		private bool _shouldClearDisplayOnNextNumberInput;
+		private bool _clearDisplayOnNextNumberInput;
 		private readonly Display _display = new Display();
+		private readonly Dictionary<string, Commands> _commandMap;
+		private readonly Dictionary<string, Operator> _operatorMap;
+
+		public PocketCalculator(Dictionary<string, Commands> commandMap, Dictionary<string, Operator> operatorMap)
+		{
+			_commandMap = commandMap;
+			_operatorMap = operatorMap;
+		}
 
 		public void Process(string inputData)
 		{
@@ -19,30 +28,49 @@ namespace Pocket_Calculator
 
 		private void HandleInput(string input)
 		{
-			if(Regex.IsMatch(input, "^[0-9]$"))
+			if (IsNumberSequence(input))
 			{
-				if (_shouldClearDisplayOnNextNumberInput)
+				if (_clearDisplayOnNextNumberInput)
 				{
 					ClearDisplay();
-					_shouldClearDisplayOnNextNumberInput = false;
+					_clearDisplayOnNextNumberInput = false;
 				}
 				HandleNumber(int.Parse(input));
 				return;
 			}
 
-			var operatorMap = InputTypeMaps.OperatorMap;
-			if (operatorMap.ContainsKey(input))
+			if (IsOperator(input))
 			{
-				HandleOperator(operatorMap[input]);
+				HandleOperator(_operatorMap[input]);
+				return;
 			}
 
-			else
+			if (IsCommand(input))
 			{
-				var commandMap = InputTypeMaps.CommandMap;
-				if (commandMap.ContainsKey(input))
-					HandleCommand(commandMap[input]);
-				else throw new ArgumentException("Could not parse input: " + input);
+				HandleCommand(MapCommand(input));
 			}
+
+			else throw new ArgumentException("Could not parse input: " + input);
+		}
+
+		private bool IsOperator(string input)
+		{
+			return _operatorMap.ContainsKey(input);
+		}
+
+		private Commands MapCommand(string input)
+		{
+			return _commandMap[input];
+		}
+
+		private bool IsCommand(string input)
+		{
+			return _commandMap.ContainsKey(input);
+		}
+
+		private static bool IsNumberSequence(string input)
+		{
+			return Regex.IsMatch(input, "^[0-9]$");
 		}
 
 		private void HandleNumber(int value)
@@ -85,7 +113,7 @@ namespace Pocket_Calculator
 
 		private void ClearDisplayOnNextNumberInput()
 		{
-			_shouldClearDisplayOnNextNumberInput = true;
+			_clearDisplayOnNextNumberInput = true;
 		}
 
 		private void DisplayRunningTotal()

@@ -12,7 +12,17 @@ namespace Pocket_Calculator
 		[Given(@"I have a pocket calculator")]
 		public void GivenIHaveAPocketCalculator()
 		{
-			_pocketCalculator = new PocketCalculator();
+			var operatorMap = new Dictionary<string, Operator>
+			{
+				{"+", Operator.Add}, {"-", Operator.Subtract}, {"/", Operator.Divide}, {"*", Operator.Multiply}, {"=", Operator.Equal}
+			};
+
+			var commandMap = new Dictionary<string, Commands>
+			{
+				{"AC", Commands.ClearAll}, {"+/-", Commands.FlipSign}
+			};
+
+			_pocketCalculator = new PocketCalculator(commandMap, operatorMap);
 		}
 
 		[Given(@"it is turned on")]
