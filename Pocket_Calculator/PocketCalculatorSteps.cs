@@ -24,7 +24,8 @@ namespace Pocket_Calculator
 				{"+/-", Commands.FlipSign},
 				{"M+", Commands.MemoryPlus},
 				{"M-", Commands.MemoryMinus},
-				{"MR", Commands.MemoryRecall}
+				{"MR", Commands.MemoryRecall},
+				{"SQRT", Commands.SquareRoot}
 			};
 
 			_pocketCalculator = new PocketCalculator(commandMap, operatorMap);

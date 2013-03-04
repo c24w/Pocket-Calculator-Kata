@@ -6,10 +6,9 @@ namespace Pocket_Calculator
 {
 	public class PocketCalculator
 	{
-		private decimal _pendingCalculation;
-		private Operator _currentOperator;
 		private bool _clearDisplayOnNumberInput;
 		private readonly Display _display = new Display();
+		private readonly PendingCalculation _pendingCalculation = new PendingCalculation();
 		private readonly Dictionary<string, Commands> _commandMap;
 		private readonly Dictionary<string, Operator> _operatorMap;
 		private decimal _memory;
@@ -122,8 +121,8 @@ namespace Pocket_Calculator
 
 		private void HandleCalculation(Operator op)
 		{
-			_pendingCalculation = _display.Value;
-			_currentOperator = op;
+			_pendingCalculation.Value = _display.Value;
+			_pendingCalculation.Operator = op;
 			ClearDisplayOnNextNumberInput();
 		}
 
@@ -134,7 +133,7 @@ namespace Pocket_Calculator
 
 		private void DisplayRunningTotal()
 		{
-			switch (_currentOperator)
+			switch (_pendingCalculation.Operator)
 			{
 				case Operator.Divide:
 					DoDivision();
@@ -153,22 +152,22 @@ namespace Pocket_Calculator
 
 		private void DoSubtraction()
 		{
-			_display.Value = _pendingCalculation - _display.Value;
+			_display.Value = _pendingCalculation.Value - _display.Value;
 		}
 
 		private void DoAddition()
 		{
-			_display.Value += _pendingCalculation;
+			_display.Value += _pendingCalculation.Value;
 		}
 
 		private void DoMultiplication()
 		{
-			_display.Value *= _pendingCalculation;
+			_display.Value *= _pendingCalculation.Value;
 		}
 
 		private void DoDivision()
 		{
-			_display.Value = _pendingCalculation / _display.Value;
+			_display.Value = _pendingCalculation.Value / _display.Value;
 		}
 
 		private void HandleCommand(Commands command)
@@ -194,19 +193,27 @@ namespace Pocket_Calculator
 				case Commands.MemoryRecall:
 					RecallMemory();
 					break;
+				case Commands.SquareRoot:
+					SquareRoot();
+					break;
 			}
+		}
+
+		private void SquareRoot()
+		{
+			_display.Value = (decimal) Math.Sqrt((double) _display.Value);
 		}
 
 		private void MemoryPlus()
 		{
-			if (DoingCalculation()) DoEquals();
+			DoEquals();
 			_memory += _display.Value;
 			_clearDisplayOnNumberInput = true;
 		}
 
 		private void MemoryMinus()
 		{
-			if (DoingCalculation()) DoEquals();
+			DoEquals();
 			_memory -= _display.Value;
 			_clearDisplayOnNumberInput = true;
 		}
@@ -218,8 +225,13 @@ namespace Pocket_Calculator
 
 		private void ClearPendingCalculation()
 		{
-			_pendingCalculation = 0;
-			_currentOperator = Operator.None;
+			ClearCurrentCalculationOperator();
+			ClearCurrentOperator();
+		}
+
+		private void ClearCurrentCalculationOperator()
+		{
+			_pendingCalculation.Value = 0;
 		}
 
 		private void FlipSign()
@@ -229,12 +241,12 @@ namespace Pocket_Calculator
 
 		private bool DoingCalculation()
 		{
-			return _currentOperator != Operator.None;
+			return _pendingCalculation.Operator != Operator.None;
 		}
 
 		private void ClearCurrentOperator()
 		{
-			_currentOperator = Operator.None;
+			_pendingCalculation.Operator = Operator.None;
 		}
 
 		private void ClearDisplay()

@@ -17,6 +17,7 @@
 		FlipSign,
 		MemoryPlus,
 		MemoryMinus,
-		MemoryRecall
+		MemoryRecall,
+		SquareRoot
 	}
 }

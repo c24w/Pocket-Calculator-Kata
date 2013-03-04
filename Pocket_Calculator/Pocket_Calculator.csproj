@@ -55,6 +55,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>memory.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\square_root.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>square_root.feature</DependentUpon>
+    </Compile>
     <Compile Include="InputTypes.cs" />
     <Compile Include="Features\entering_integers.feature.cs">
       <AutoGen>True</AutoGen>
@@ -71,6 +76,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>pocket_calculator.feature</DependentUpon>
     </Compile>
+    <Compile Include="PendingCalculation.cs" />
     <Compile Include="PocketCalculator.cs" />
     <Compile Include="PocketCalculatorSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +104,10 @@
     <None Include="Features\pocket_calculator.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>pocket_calculator.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\square_root.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>square_root.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
