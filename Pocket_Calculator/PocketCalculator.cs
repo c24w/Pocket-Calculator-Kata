@@ -12,14 +12,21 @@ namespace Pocket_Calculator
 		private readonly Dictionary<string, Commands> _commandMap;
 		private readonly Dictionary<string, Operator> _operatorMap;
 		private decimal _memory;
+		private bool _showNegativeSign;
+		private bool _canShowNegativeSign;
 
 		public string Display
 		{
 			get
 			{
+				string result;
+
 				if(_display.Value == (int) _display.Value)
-					return String.Format("{0}.", _display.Value);
-				return _display.Value.ToString();
+					result = String.Format("{0}.", _display.Value);
+	
+				else result = _display.Value.ToString();
+
+				return (_showNegativeSign ? "-" : "") + result;
 			}
 		}
 
@@ -94,6 +101,7 @@ namespace Pocket_Calculator
 
 		private void HandleNumberSequence(string value)
 		{
+			_canShowNegativeSign = true;
 			ClearDisplayIfRequired();
 			if (CanDisplayMoreDigits())
 				AppendNumberSequence(value);
@@ -105,6 +113,7 @@ namespace Pocket_Calculator
 			{
 				case Operator.Equal:
 					DoEquals();
+					_canShowNegativeSign = false;
 					break;
 				default:
 					if (DoingCalculation())
@@ -185,6 +194,7 @@ namespace Pocket_Calculator
 				case Commands.ClearAll:
 					ClearDisplay();
 					ClearPendingCalculation();
+					_canShowNegativeSign = false;
 					break;
 				case Commands.FlipSign:
 					FlipSign();
@@ -247,6 +257,7 @@ namespace Pocket_Calculator
 
 		private void FlipSign()
 		{
+			_showNegativeSign = _display.Value == 0 && _canShowNegativeSign;
 			_display.Value = 0 - _display.Value;
 		}
 
