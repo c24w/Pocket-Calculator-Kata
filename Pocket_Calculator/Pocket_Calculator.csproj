@@ -55,6 +55,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>memory.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\negative_integers.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>negative_integers.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\square_root.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,6 +105,10 @@
     <None Include="Features\memory.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>memory.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\negative_integers.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>negative_integers.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\pocket_calculator.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

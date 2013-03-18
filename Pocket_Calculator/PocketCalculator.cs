@@ -268,12 +268,15 @@ namespace Pocket_Calculator
 		private void AppendNumberSequence(string numberSequence)
 		{
 			if (_display.Value != 0)
-				ShiftValue();
+				ShiftDigits();
 			var value = int.Parse(numberSequence);
+
+			if (_display.Value < 0) value = -value;
+
 			_display.Value += value;
 		}
 
-		private void ShiftValue()
+		private void ShiftDigits()
 		{
 			_display.Value *= 10;
 		}
